@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fórum Online</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.5/purify.min.js"></script>
+</head>
+<body>
+    
+
+    <div class="container">
+        <nav id="nav-bar">
+            <button onclick="showLogin()">Login</button>
+            <button onclick="showRegister()">Registrar</button>
+            <button onclick="showForum()" id="forum-btn" style="display: none;">Fórum</button>
+            <button onclick="logout()" id="logout-btn" style="display: none;">Sair</button>
+        </nav>
+
+        <!-- Formulário de Login -->
+        <div id="login-form" class="auth-form">
+            <h2>Login</h2>
+            <input type="text" id="login-username" placeholder="Usuário">
+            <input type="password" id="login-password" placeholder="Senha">
+            <button onclick="login()">Entrar</button>
+            <p>Não tem uma conta? <a href="#" onclick="showRegister()">Registre-se</a></p>
+        </div>
+
+        <!-- Formulário de Registro -->
+        <div id="register-form" class="auth-form" style="display: none;">
+            <h2>Registro</h2>
+            <input type="text" id="register-username" placeholder="Usuário">
+            <input type="password" id="register-password" placeholder="Senha">
+            <button onclick="register()">Registrar</button>
+            <p>Já tem uma conta? <a href="#" onclick="showLogin()">Faça login</a></p>
+        </div>
+
+        <!-- Área do Fórum (atualizada com preview) -->
+        <div id="forum-area" style="display: none;">
+            <div class="post-form">
+                <h3>Criar Nova Postagem</h3>
+                <input type="text" id="post-title" placeholder="Título">
+                <div class="editor-container">
+                    <div class="editor-toolbar">
+                        <div class="editor-tabs">
+                            <button type="button" onclick="switchTab('write')" class="tab-btn active" data-tab="write">Escrever</button>
+                            <button type="button" onclick="switchTab('preview')" class="tab-btn" data-tab="preview">Preview</button>
+                        </div>
+                        <div class="image-upload">
+                            <input type="file" id="image-input" accept="image/*" style="display: none;">
+                            <button type="button" class="upload-btn" onclick="document.getElementById('image-input').click()">
+                                <i class="fas fa-image"></i> Adicionar Imagem
+                            </button>
+                        </div>
+                    </div>
+                    <div id="write-tab" class="tab-content active">
+                        <textarea id="post-content" placeholder="Conteúdo (suporta Markdown)"></textarea>
+                    </div>
+                    <div id="preview-tab" class="tab-content">
+                        <div id="preview-content" class="markdown-preview"></div>
+                    </div>
+                </div>
+                <div class="markdown-tips">
+                    <p>Dicas de formatação:</p>
+                    <code>**negrito**</code>
+                    <code>*itálico*</code>
+                    <code># título</code>
+                    <code>[link](url)</code>
+                    <code>```código```</code>
+                </div>
+                <button type="button" onclick="createPost()">Publicar</button>
+            </div>
+            <div id="posts-list">
+                <!-- Posts serão inseridos aqui dinamicamente -->
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 
